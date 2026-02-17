@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+/* BACKGROUND ANIMATION LAYER */
+.bg-animate-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+
+  background:
+    radial-gradient(
+      var(--spread) at var(--x) var(--y),
+      rgba(0, 0, 0, 0.12),
+      rgba(255, 255, 255, 1) 70%
+    );
+
+  transition: background 0.08s ease-out;
+}
+
+
