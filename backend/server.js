@@ -1,31 +1,45 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const fetch = require("node-fetch"); // safe for production
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://nportfolio-kappa.vercel.app"
+  ]
+}));
+
 app.use(express.json());
 
 app.post("/api/chat", async (req, res) => {
   try {
     const { message } = req.body;
 
-    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${process.env.GROQ_API_KEY}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-  model: "llama-3.1-8b-instant",
-        messages: [
-          { role: "system", content: "You are a professional portfolio assistant." },
-          { role: "user", content: message }
-        ]
-      })
-    });
+    if (!message) {
+      return res.status(400).json({ reply: "Message is required." });
+    }
+
+    const response = await fetch(
+      "https://api.groq.com/openai/v1/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: "llama-3.1-8b-instant",
+          messages: [
+            { role: "system", content: "You are a professional portfolio assistant." },
+            { role: "user", content: message },
+          ],
+        }),
+      }
+    );
 
     const data = await response.json();
     console.log("GROQ RESPONSE:", data);
