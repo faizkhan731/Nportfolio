@@ -7,11 +7,12 @@ import { ExternalLink } from "lucide-react";
 // import learningImg from "../assets/projects/learning.png";
 import chicken from "../../public/chicken.png";
 import healthy from "../../public/healthy.png";
+import railway from "../../public/railway dashboard.png"
 
 const projects = [
   {
     title: "Indian Railway System",
-    image: chicken,
+    image: railway,
     description:
       "A comprehensive railway reservation and management system inspired by IRCTC. The platform allows users to search trains, check availability, simulate ticket booking flows, and manage user authentication. Designed with a responsive UI and scalable backend architecture to reflect real-world railway systems.",
     tech: [
@@ -23,7 +24,7 @@ const projects = [
       "Tailwind CSS",
       "MySQL",
     ],
-    link: "#",
+    link: "https://railway-management-three.vercel.app/",
   },
   {
     title: "HealthyLifestyle",
@@ -56,7 +57,7 @@ const projects = [
       "Express.js",
       "MySQL",
     ],
-    link: "#",
+    link: "https://chicken-rouge.vercel.app/",
   },
   {
     title: "Online Learning Platform",
